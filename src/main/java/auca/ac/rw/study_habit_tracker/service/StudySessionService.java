@@ -6,7 +6,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
+import auca.ac.rw.study_habit_tracker.model.SessionStatus;
+import java.time.LocalDate;
 @Service 
 public class StudySessionService {
     @Autowired
@@ -42,5 +43,11 @@ public class StudySessionService {
         }
         studySessionRepository.deleteById(id);
         return "Study session deleted successfully";
+    }
+    public List<StudySession> getStudySessionsByStatus(SessionStatus status) {
+        return studySessionRepository.findByStatusOrderBySessionDateAsc(status);
+    }
+    public List<StudySession> getStudySessionsBetween(LocalDate start, LocalDate end) {
+        return studySessionRepository.findBySessionDateBetweenOrderBySessionDateAsc(start, end);
     }
 }

@@ -53,4 +53,8 @@ public class StudentController {
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
     }
+    @GetMapping("/by-last-name")
+    public List<Student> getByLastName(@RequestParam String lastName) {
+        return studentService.getStudentsByLastName(lastName);
+    }
 }
