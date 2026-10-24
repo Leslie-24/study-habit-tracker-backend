@@ -19,7 +19,13 @@ public class StudySessionController {
     @PostMapping("/save")
     public ResponseEntity<String> save(@RequestBody StudySession studySession) {
         String message = studySessionService.saveStudySession(studySession);
-        return new ResponseEntity<>(message, HttpStatus.CREATED);
+        if (message.equals("Study session saved successfully")) {
+            return new ResponseEntity<>(message, HttpStatus.CREATED);
+        } else if (message.equals("Study session date cannot be in the past")) {
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        } else {
+            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
+        }
     }
     @GetMapping("/all")
     public List<StudySession> getAll() {
@@ -61,5 +67,16 @@ public class StudySessionController {
         LocalDate startDate = LocalDate.parse(start);
         LocalDate endDate = LocalDate.parse(end);
         return studySessionService.getStudySessionsBetween(startDate, endDate);
+    }
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<String> updateStatus(@PathVariable UUID id, @RequestParam SessionStatus status) {
+        String message = studySessionService.updateStudySessionStatus(id, status);
+        if (message.equals("Study session status updated successfully")) {
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        } else if (message.equals("The study session with that id does not exist")) {
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
     }
 }

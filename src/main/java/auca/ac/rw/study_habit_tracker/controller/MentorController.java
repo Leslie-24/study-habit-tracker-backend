@@ -55,4 +55,26 @@ public class MentorController {
         public List<Mentor> getBySubject(@RequestParam String name) {
         return mentorService.getMentorsBySubject(name);
     }
+    @PutMapping("/{mentorId}/subjects/{subjectId}")
+        public ResponseEntity<String> addSubject(@PathVariable UUID mentorId, @PathVariable UUID subjectId) {
+            String message = mentorService.addSubjectToMentor(mentorId, subjectId);
+            if (message.equals("Subject added to the mentor")) {
+                return new ResponseEntity<>(message, HttpStatus.OK);
+            } else if (message.equals("The mentor already has that subject")) {
+                return new ResponseEntity<>(message, HttpStatus.CONFLICT);
+            } else {
+                return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+            }
+        }
+    @PatchMapping("/{mentorId}/study-room")
+    public ResponseEntity<String> changeStudyRoom(@PathVariable UUID mentorId, @RequestParam int roomNumber) {
+        String message = mentorService.changeStudyRoom(mentorId, roomNumber);
+        if (message.equals("Study room changed successfully")) {
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        } else if (message.equals("That study room is taken by another mentor")) {
+            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
+        } else {
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
+    }
 }

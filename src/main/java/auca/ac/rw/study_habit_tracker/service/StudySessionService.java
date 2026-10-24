@@ -13,6 +13,15 @@ public class StudySessionService {
     @Autowired
     private StudySessionRepository studySessionRepository;
     public String saveStudySession(StudySession studySession) {
+        if (studySession.getSessionDate().isBefore(LocalDate.now())) {
+            return "Study session date cannot be in the past";
+        }
+        if (studySession.getMentor() != null
+                && studySessionRepository.existsByMentorIdAndSessionDateAndStatusNot(
+                    studySession.getMentor().getId(), studySession.getSessionDate(), SessionStatus.SKIPPED)) {
+            return "Mentor already supervises a session on that date";
+        }
+        studySession.setStatus(SessionStatus.PLANNED);
         studySessionRepository.save(studySession);
         return "Study session saved successfully";
     }
@@ -29,7 +38,6 @@ public class StudySessionService {
         }
         StudySession session = found.get();
         session.setSessionDate(newSession.getSessionDate());
-        session.setStatus(newSession.getStatus());
         session.setGoal(newSession.getGoal());
         session.setPlannedMinutes(newSession.getPlannedMinutes());
         session.setStudent(newSession.getStudent());
@@ -49,5 +57,28 @@ public class StudySessionService {
     }
     public List<StudySession> getStudySessionsBetween(LocalDate start, LocalDate end) {
         return studySessionRepository.findBySessionDateBetweenOrderBySessionDateAsc(start, end);
+    }
+    public String updateStudySessionStatus(UUID id, SessionStatus newStatus) {
+        Optional<StudySession> found = studySessionRepository.findById(id);
+        if (found.isEmpty()) {
+            return "The study session with that id does not exist";
+        }
+        StudySession session = found.get();
+        SessionStatus current = session.getStatus();
+        boolean allowed = false;
+        if (current == SessionStatus.PLANNED
+                && (newStatus == SessionStatus.IN_PROGRESS || newStatus == SessionStatus.SKIPPED)) {
+            allowed = true;
+        }
+        if (current == SessionStatus.IN_PROGRESS
+                && (newStatus == SessionStatus.FINISHED || newStatus == SessionStatus.SKIPPED)) {
+            allowed = true;
+        }
+        if (!allowed) {
+            return "Cannot change status from " + current + " to " + newStatus;
+        }
+        session.setStatus(newStatus);
+        studySessionRepository.save(session);
+        return "Study session status updated successfully";
     }
 }

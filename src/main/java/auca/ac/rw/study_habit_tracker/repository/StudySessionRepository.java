@@ -12,4 +12,5 @@ import org.springframework.data.repository.query.Param;
 public interface StudySessionRepository extends JpaRepository<StudySession, UUID> {
     List<StudySession> findByStatusOrderBySessionDateAsc(SessionStatus status);
     List<StudySession> findBySessionDateBetweenOrderBySessionDateAsc(LocalDate start, LocalDate end);
+    boolean existsByMentorIdAndSessionDateAndStatusNot(UUID mentorId, LocalDate sessionDate, SessionStatus status);
 }
