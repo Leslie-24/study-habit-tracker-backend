@@ -1,5 +1,6 @@
 package auca.ac.rw.study_habit_tracker.service;
 import auca.ac.rw.study_habit_tracker.model.StudySession;
+import auca.ac.rw.study_habit_tracker.repository.StudyLogRepository;
 import auca.ac.rw.study_habit_tracker.repository.StudySessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,8 @@ import java.time.LocalDate;
 public class StudySessionService {
     @Autowired
     private StudySessionRepository studySessionRepository;
+    @Autowired
+    private StudyLogRepository studyLogRepository;
     public String saveStudySession(StudySession studySession) {
         if (studySession.getSessionDate().isBefore(LocalDate.now())) {
             return "Study session date cannot be in the past";
@@ -46,8 +49,12 @@ public class StudySessionService {
         return "Study session updated successfully";
     }
     public String deleteStudySession(UUID id) {
-        if (!studySessionRepository.existsById(id)) {
+        Optional<StudySession> found = studySessionRepository.findById(id);
+        if (found.isEmpty()) {
             return "The study session with that id does not exist";
+        }
+        if (studyLogRepository.existsByStudySession(found.get())) {
+            return "That study session has study logs, delete them first";
         }
         studySessionRepository.deleteById(id);
         return "Study session deleted successfully";

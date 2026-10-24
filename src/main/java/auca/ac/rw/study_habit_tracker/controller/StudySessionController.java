@@ -49,13 +49,15 @@ public class StudySessionController {
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
     }
-    @DeleteMapping ("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable UUID id) {
         String message = studySessionService.deleteStudySession(id);
         if (message.equals("Study session deleted successfully")) {
             return new ResponseEntity<>(message, HttpStatus.OK);
-        } else {
+        } else if (message.equals("The study session with that id does not exist")) {
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
         }
     }
     @GetMapping("/by-status")
