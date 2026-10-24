@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 import auca.ac.rw.study_habit_tracker.model.SessionStatus;
 import java.time.LocalDate;
+import org.springframework.transaction.annotation.Transactional;
 @Service 
 public class StudySessionService {
     @Autowired
@@ -87,5 +88,13 @@ public class StudySessionService {
         session.setStatus(newStatus);
         studySessionRepository.save(session);
         return "Study session status updated successfully";
+    }
+    public List<Object[]> getSessionCountsByStatus() {
+        return studySessionRepository.countSessionsByStatus();
+    }
+    @Transactional
+    public String cancelDay(UUID mentorId, LocalDate date) {
+        int count = studySessionRepository.cancelDay(mentorId, date, SessionStatus.SKIPPED, SessionStatus.FINISHED);
+        return count + " study sessions cancelled";
     }
 }

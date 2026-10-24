@@ -81,4 +81,14 @@ public class StudySessionController {
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
     }
+    @GetMapping("/stats/by-status")
+    public List<Object[]> getStatsByStatus() {
+        return studySessionService.getSessionCountsByStatus();
+    }
+    @PatchMapping("/cancel-day")
+    public ResponseEntity<String> cancelDay(@RequestParam UUID mentorId, @RequestParam String date) {
+        LocalDate day = LocalDate.parse(date);
+        String message = studySessionService.cancelDay(mentorId, day);
+        return new ResponseEntity<>(message, HttpStatus.OK);
+    }
 }
