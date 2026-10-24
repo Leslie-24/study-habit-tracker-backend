@@ -53,4 +53,8 @@ public class StudyRoomController {
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
     }
+    @GetMapping("/free")
+    public List<StudyRoom> getFree() {
+        return studyRoomService.getFreeStudyRooms();
+    }
 }

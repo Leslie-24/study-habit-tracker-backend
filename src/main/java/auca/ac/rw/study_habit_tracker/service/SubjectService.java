@@ -40,4 +40,7 @@ public class SubjectService {
         subjectRepository.deleteById(id);
         return "Subject deleted successfully";
     }
+    public List<Subject> getUnusedSubjects() {
+        return subjectRepository.findUnusedSubjects();
+    }
 }

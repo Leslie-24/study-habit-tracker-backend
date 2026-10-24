@@ -5,6 +5,9 @@ import java.util.UUID;
 import java.util.List;
 import auca.ac.rw.study_habit_tracker.model.SessionStatus;
 import java.time.LocalDate;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
 
 public interface StudySessionRepository extends JpaRepository<StudySession, UUID> {
     List<StudySession> findByStatusOrderBySessionDateAsc(SessionStatus status);

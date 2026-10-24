@@ -44,5 +44,7 @@ public class StudyRoomService {
         studyRoomRepository.deleteById(id);
         return "Study room deleted successfully";
     }
-
+    public List<StudyRoom> getFreeStudyRooms() {
+        return studyRoomRepository.findFreeStudyRooms();
+    }
 }

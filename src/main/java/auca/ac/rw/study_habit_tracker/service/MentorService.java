@@ -42,4 +42,7 @@ public class MentorService {
         mentorRepository.deleteById(id);
         return "Mentor deleted successfully";
     }
+    public List<Mentor> getMentorsBySubject(String name) {
+        return mentorRepository.findMentorsBySubjectName(name);
+    }
 }

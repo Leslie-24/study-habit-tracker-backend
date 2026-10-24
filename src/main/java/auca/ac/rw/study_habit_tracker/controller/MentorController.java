@@ -51,4 +51,8 @@ public class MentorController {
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
     }
+    @GetMapping("/by-subject")
+        public List<Mentor> getBySubject(@RequestParam String name) {
+        return mentorService.getMentorsBySubject(name);
+    }
 }

@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
-
-
-
+import auca.ac.rw.study_habit_tracker.service.MentorService;
+import auca.ac.rw.study_habit_tracker.model.Mentor;
 @RestController
 @RequestMapping("/api/students")
 public class StudentController {
     @Autowired 
     private StudentService studentService;
+    @Autowired
+    private MentorService mentorService;
     @PostMapping("/save")
     public ResponseEntity<String> save(@RequestBody Student student) {
         String message = studentService.saveStudent(student);
@@ -56,5 +56,13 @@ public class StudentController {
     @GetMapping("/by-last-name")
     public List<Student> getByLastName(@RequestParam String lastName) {
         return studentService.getStudentsByLastName(lastName);
+    }
+    @GetMapping("/of-mentor/{mentorId}")
+    public ResponseEntity<?> getOfMentor(@PathVariable UUID mentorId) {
+        Optional<Mentor> mentor = mentorService.getMentorById(mentorId);
+        if (mentor.isEmpty()) {
+            return new ResponseEntity<>("The mentor with that id does not exist", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(studentService.getStudentsOfMentor(mentorId), HttpStatus.OK);
     }
 }
