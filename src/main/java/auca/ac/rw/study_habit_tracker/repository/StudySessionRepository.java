@@ -23,4 +23,6 @@ public interface StudySessionRepository extends JpaRepository<StudySession, UUID
     @Query("UPDATE StudySession s SET s.status = :skipped WHERE s.mentor.id = :mentorId AND s.sessionDate = :date AND s.status <> :finished")
     int cancelDay(@Param("mentorId") UUID mentorId, @Param("date") LocalDate date,
                   @Param("skipped") SessionStatus skipped, @Param("finished") SessionStatus finished);
+    long countBySessionDate(LocalDate sessionDate);
+    long countByStatus(SessionStatus status);
 }

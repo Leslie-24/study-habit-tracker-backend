@@ -10,6 +10,10 @@ import java.util.Optional;
 import java.util.UUID;
 import auca.ac.rw.study_habit_tracker.model.SessionStatus;
 import java.time.LocalDate;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 @RestController
 @RequestMapping("/api/study-sessions")
@@ -90,5 +94,16 @@ public class StudySessionController {
         LocalDate day = LocalDate.parse(date);
         String message = studySessionService.cancelDay(mentorId, day);
         return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+    @GetMapping("/page")
+    public Page<StudySession> getPage(@RequestParam int page, @RequestParam int size, @RequestParam String sort) {
+        String[] parts = sort.split(",");
+        String field = parts[0];
+        Sort.Direction direction = Sort.Direction.ASC;
+        if (parts.length > 1 && parts[1].equalsIgnoreCase("desc")) {
+            direction = Sort.Direction.DESC;
+        }
+        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, field));
+        return studySessionService.getStudySessionsPage(pageable);
     }
 }

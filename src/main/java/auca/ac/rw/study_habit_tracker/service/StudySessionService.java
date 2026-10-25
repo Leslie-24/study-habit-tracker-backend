@@ -10,6 +10,8 @@ import java.util.UUID;
 import auca.ac.rw.study_habit_tracker.model.SessionStatus;
 import java.time.LocalDate;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 @Service 
 public class StudySessionService {
     @Autowired
@@ -96,5 +98,8 @@ public class StudySessionService {
     public String cancelDay(UUID mentorId, LocalDate date) {
         int count = studySessionRepository.cancelDay(mentorId, date, SessionStatus.SKIPPED, SessionStatus.FINISHED);
         return count + " study sessions cancelled";
+    }
+    public Page<StudySession> getStudySessionsPage(Pageable pageable) {
+        return studySessionRepository.findAll(pageable);
     }
 }
