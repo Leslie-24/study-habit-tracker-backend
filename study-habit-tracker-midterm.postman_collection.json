@@ -1,0 +1,3923 @@
+{
+  "info": {
+    "_postman_id": "468e5a97-65d9-4f09-8e56-da306d2fdd02",
+    "name": "study-habit-tracker-midterm",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "58190698",
+    "_collection_link": "https://go.postman.co/collection/58190698-468e5a97-65d9-4f09-8e56-da306d2fdd02?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "00 Seed data (run ONCE)",
+      "item": [
+        {
+          "name": "Seed subject Mathematics",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Subject saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Mathematics\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/subjects/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "subjects",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed subject Programming",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Subject saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Programming\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/subjects/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "subjects",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed subject Physics",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Subject saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Physics\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/subjects/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "subjects",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed subject History",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Subject saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"History\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/subjects/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "subjects",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed capture subject ids",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "var data = pm.response.json();",
+                  "function pick(f, v) { var x = data.find(function (o) { return o[f] === v; }); return x ? x.id : ''; }",
+                  "pm.collectionVariables.set(\"subjMath\", pick(\"name\", \"Mathematics\"));",
+                  "pm.test(\"Captured subjMath\", function () { pm.expect(pm.collectionVariables.get(\"subjMath\")).to.not.eql(\"\"); });",
+                  "pm.collectionVariables.set(\"subjProg\", pick(\"name\", \"Programming\"));",
+                  "pm.test(\"Captured subjProg\", function () { pm.expect(pm.collectionVariables.get(\"subjProg\")).to.not.eql(\"\"); });",
+                  "pm.collectionVariables.set(\"subjPhys\", pick(\"name\", \"Physics\"));",
+                  "pm.test(\"Captured subjPhys\", function () { pm.expect(pm.collectionVariables.get(\"subjPhys\")).to.not.eql(\"\"); });",
+                  "pm.collectionVariables.set(\"subjHist\", pick(\"name\", \"History\"));",
+                  "pm.test(\"Captured subjHist\", function () { pm.expect(pm.collectionVariables.get(\"subjHist\")).to.not.eql(\"\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/subjects/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "subjects",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed study room 11",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Study room saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roomNumber\": 11,\n  \"name\": \"Quiet Room A\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/study-rooms/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-rooms",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed study room 12",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Study room saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roomNumber\": 12,\n  \"name\": \"Library Room B\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/study-rooms/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-rooms",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed study room 13",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Study room saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roomNumber\": 13,\n  \"name\": \"Group Room C\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/study-rooms/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-rooms",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed study room 14",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Study room saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roomNumber\": 14,\n  \"name\": \"Overflow Room D\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/study-rooms/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-rooms",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed capture study room ids",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "var data = pm.response.json();",
+                  "function pick(f, v) { var x = data.find(function (o) { return o[f] === v; }); return x ? x.id : ''; }",
+                  "pm.collectionVariables.set(\"room11\", pick(\"roomNumber\", 11));",
+                  "pm.test(\"Captured room11\", function () { pm.expect(pm.collectionVariables.get(\"room11\")).to.not.eql(\"\"); });",
+                  "pm.collectionVariables.set(\"room12\", pick(\"roomNumber\", 12));",
+                  "pm.test(\"Captured room12\", function () { pm.expect(pm.collectionVariables.get(\"room12\")).to.not.eql(\"\"); });",
+                  "pm.collectionVariables.set(\"room13\", pick(\"roomNumber\", 13));",
+                  "pm.test(\"Captured room13\", function () { pm.expect(pm.collectionVariables.get(\"room13\")).to.not.eql(\"\"); });",
+                  "pm.collectionVariables.set(\"room14\", pick(\"roomNumber\", 14));",
+                  "pm.test(\"Captured room14\", function () { pm.expect(pm.collectionVariables.get(\"room14\")).to.not.eql(\"\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/study-rooms/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-rooms",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed mentor Alice",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Mentor saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Uwase\",\n  \"email\": \"alice.uwase@auca.ac.rw\",\n  \"studyRoom\": {\n    \"id\": \"{{room11}}\"\n  },\n  \"subjects\": [\n    {\n      \"id\": \"{{subjMath}}\"\n    },\n    {\n      \"id\": \"{{subjProg}}\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/mentors/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "mentors",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed mentor Brian",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Mentor saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Brian\",\n  \"lastName\": \"Habimana\",\n  \"email\": \"brian.habimana@auca.ac.rw\",\n  \"studyRoom\": {\n    \"id\": \"{{room12}}\"\n  },\n  \"subjects\": [\n    {\n      \"id\": \"{{subjPhys}}\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/mentors/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "mentors",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed mentor Chantal",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Mentor saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Chantal\",\n  \"lastName\": \"Mukamana\",\n  \"email\": \"chantal.mukamana@auca.ac.rw\",\n  \"studyRoom\": {\n    \"id\": \"{{room13}}\"\n  },\n  \"subjects\": [\n    {\n      \"id\": \"{{subjMath}}\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/mentors/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "mentors",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed capture mentor ids",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "var data = pm.response.json();",
+                  "function pick(f, v) { var x = data.find(function (o) { return o[f] === v; }); return x ? x.id : ''; }",
+                  "pm.collectionVariables.set(\"mentAlice\", pick(\"lastName\", \"Uwase\"));",
+                  "pm.test(\"Captured mentAlice\", function () { pm.expect(pm.collectionVariables.get(\"mentAlice\")).to.not.eql(\"\"); });",
+                  "pm.collectionVariables.set(\"mentBrian\", pick(\"lastName\", \"Habimana\"));",
+                  "pm.test(\"Captured mentBrian\", function () { pm.expect(pm.collectionVariables.get(\"mentBrian\")).to.not.eql(\"\"); });",
+                  "pm.collectionVariables.set(\"mentChantal\", pick(\"lastName\", \"Mukamana\"));",
+                  "pm.test(\"Captured mentChantal\", function () { pm.expect(pm.collectionVariables.get(\"mentChantal\")).to.not.eql(\"\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/mentors/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "mentors",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed student Eric Gasana",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Student saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Eric\",\n  \"lastName\": \"Gasana\",\n  \"studentNumber\": \"27413\",\n  \"programme\": \"Software Engineering\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/students/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "students",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed student Diane Gasana",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Student saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Diane\",\n  \"lastName\": \"Gasana\",\n  \"studentNumber\": \"27520\",\n  \"programme\": \"Information Technology\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/students/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "students",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed student Patrick Niyonzima",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Student saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Patrick\",\n  \"lastName\": \"Niyonzima\",\n  \"studentNumber\": \"27601\",\n  \"programme\": \"Software Engineering\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/students/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "students",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed student Grace Ishimwe",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Student saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Grace\",\n  \"lastName\": \"Ishimwe\",\n  \"studentNumber\": \"27688\",\n  \"programme\": \"Information Technology\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/students/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "students",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed student Samuel Mugisha",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Student saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Samuel\",\n  \"lastName\": \"Mugisha\",\n  \"studentNumber\": \"27734\",\n  \"programme\": \"Software Engineering\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/students/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "students",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed capture student ids",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "var data = pm.response.json();",
+                  "function pick(f, v) { var x = data.find(function (o) { return o[f] === v; }); return x ? x.id : ''; }",
+                  "pm.collectionVariables.set(\"stuEric\", pick(\"studentNumber\", \"27413\"));",
+                  "pm.test(\"Captured stuEric\", function () { pm.expect(pm.collectionVariables.get(\"stuEric\")).to.not.eql(\"\"); });",
+                  "pm.collectionVariables.set(\"stuDiane\", pick(\"studentNumber\", \"27520\"));",
+                  "pm.test(\"Captured stuDiane\", function () { pm.expect(pm.collectionVariables.get(\"stuDiane\")).to.not.eql(\"\"); });",
+                  "pm.collectionVariables.set(\"stuPatrick\", pick(\"studentNumber\", \"27601\"));",
+                  "pm.test(\"Captured stuPatrick\", function () { pm.expect(pm.collectionVariables.get(\"stuPatrick\")).to.not.eql(\"\"); });",
+                  "pm.collectionVariables.set(\"stuGrace\", pick(\"studentNumber\", \"27688\"));",
+                  "pm.test(\"Captured stuGrace\", function () { pm.expect(pm.collectionVariables.get(\"stuGrace\")).to.not.eql(\"\"); });",
+                  "pm.collectionVariables.set(\"stuSamuel\", pick(\"studentNumber\", \"27734\"));",
+                  "pm.test(\"Captured stuSamuel\", function () { pm.expect(pm.collectionVariables.get(\"stuSamuel\")).to.not.eql(\"\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/students/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "students",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed session 1 (2026-10-05 FINISHED)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Study session saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sessionDate\": \"2026-10-05\",\n  \"status\": \"FINISHED\",\n  \"goal\": \"Finish calculus chapter 3\",\n  \"plannedMinutes\": 90,\n  \"student\": {\n    \"id\": \"{{stuEric}}\"\n  },\n  \"mentor\": {\n    \"id\": \"{{mentAlice}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/study-sessions/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-sessions",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed session 2 (2026-10-12 FINISHED)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Study session saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sessionDate\": \"2026-10-12\",\n  \"status\": \"FINISHED\",\n  \"goal\": \"Revise kinematics\",\n  \"plannedMinutes\": 60,\n  \"student\": {\n    \"id\": \"{{stuEric}}\"\n  },\n  \"mentor\": {\n    \"id\": \"{{mentBrian}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/study-sessions/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-sessions",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed session 3 (2026-10-20 SKIPPED)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Study session saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sessionDate\": \"2026-10-20\",\n  \"status\": \"SKIPPED\",\n  \"goal\": \"Java collections practice\",\n  \"plannedMinutes\": 45,\n  \"student\": {\n    \"id\": \"{{stuDiane}}\"\n  },\n  \"mentor\": {\n    \"id\": \"{{mentAlice}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/study-sessions/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-sessions",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed session 4 (2026-10-20 PLANNED)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Study session saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sessionDate\": \"2026-10-20\",\n  \"status\": \"PLANNED\",\n  \"goal\": \"Integration by parts\",\n  \"plannedMinutes\": 90,\n  \"student\": {\n    \"id\": \"{{stuPatrick}}\"\n  },\n  \"mentor\": {\n    \"id\": \"{{mentAlice}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/study-sessions/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-sessions",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed session 5 (2026-10-27 PLANNED)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Study session saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sessionDate\": \"2026-10-27\",\n  \"status\": \"PLANNED\",\n  \"goal\": \"Limits and continuity\",\n  \"plannedMinutes\": 60,\n  \"student\": {\n    \"id\": \"{{stuEric}}\"\n  },\n  \"mentor\": {\n    \"id\": \"{{mentChantal}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/study-sessions/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-sessions",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed session 6 (2026-10-28 IN_PROGRESS)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Study session saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sessionDate\": \"2026-10-28\",\n  \"status\": \"IN_PROGRESS\",\n  \"goal\": \"Newton laws problems\",\n  \"plannedMinutes\": 75,\n  \"student\": {\n    \"id\": \"{{stuGrace}}\"\n  },\n  \"mentor\": {\n    \"id\": \"{{mentBrian}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/study-sessions/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-sessions",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed session 7 (2026-11-03 PLANNED)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Study session saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sessionDate\": \"2026-11-03\",\n  \"status\": \"PLANNED\",\n  \"goal\": \"Matrices revision\",\n  \"plannedMinutes\": 60,\n  \"student\": {\n    \"id\": \"{{stuSamuel}}\"\n  },\n  \"mentor\": {\n    \"id\": \"{{mentChantal}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/study-sessions/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-sessions",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed session 8 (2026-11-05 FINISHED)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Study session saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sessionDate\": \"2026-11-05\",\n  \"status\": \"FINISHED\",\n  \"goal\": \"Differential equations drill\",\n  \"plannedMinutes\": 120,\n  \"student\": {\n    \"id\": \"{{stuPatrick}}\"\n  },\n  \"mentor\": {\n    \"id\": \"{{mentChantal}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/study-sessions/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-sessions",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed session 9 (2026-11-10 PLANNED)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Study session saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sessionDate\": \"2026-11-10\",\n  \"status\": \"PLANNED\",\n  \"goal\": \"Thermodynamics basics\",\n  \"plannedMinutes\": 60,\n  \"student\": {\n    \"id\": \"{{stuDiane}}\"\n  },\n  \"mentor\": {\n    \"id\": \"{{mentBrian}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/study-sessions/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-sessions",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed session 10 (2026-11-17 SKIPPED)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Study session saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sessionDate\": \"2026-11-17\",\n  \"status\": \"SKIPPED\",\n  \"goal\": \"OOP design review\",\n  \"plannedMinutes\": 45,\n  \"student\": {\n    \"id\": \"{{stuGrace}}\"\n  },\n  \"mentor\": {\n    \"id\": \"{{mentAlice}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/study-sessions/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-sessions",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Seed capture session id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "var data = pm.response.json();",
+                  "function pick(f, v) { var x = data.find(function (o) { return o[f] === v; }); return x ? x.id : ''; }",
+                  "pm.collectionVariables.set(\"sess1\", pick(\"goal\", \"Finish calculus chapter 3\"));",
+                  "pm.test(\"Captured sess1\", function () { pm.expect(pm.collectionVariables.get(\"sess1\")).to.not.eql(\"\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/study-sessions/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-sessions",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "A2 CRUD checks",
+      "item": [
+        {
+          "name": "A2 subjects - get all",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/subjects/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "subjects",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 subjects - get by id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/subjects/{{subjMath}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "subjects",
+                "{{subjMath}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 subjects - get by id (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", function () { pm.response.to.have.status(404); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"The subject with that id does not exist\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/subjects/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "subjects",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 subjects - update",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Subject updated successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Mathematics\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/subjects/update/{{subjMath}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "subjects",
+                "update",
+                "{{subjMath}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 subjects - update (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", function () { pm.response.to.have.status(404); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"The subject with that id does not exist\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Mathematics\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/subjects/update/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "subjects",
+                "update",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 subjects - delete (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", function () { pm.response.to.have.status(404); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"The subject with that id does not exist\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/subjects/delete/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "subjects",
+                "delete",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 study-rooms - get all",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/study-rooms/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-rooms",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 study-rooms - get by id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/study-rooms/{{room11}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-rooms",
+                "{{room11}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 study-rooms - get by id (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", function () { pm.response.to.have.status(404); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"The study room with that id does not exist\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/study-rooms/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-rooms",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 study-rooms - update",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Study room updated successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roomNumber\": 11,\n  \"name\": \"Quiet Room A\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/study-rooms/update/{{room11}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-rooms",
+                "update",
+                "{{room11}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 study-rooms - update (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", function () { pm.response.to.have.status(404); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"The study room with that id does not exist\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roomNumber\": 11,\n  \"name\": \"Quiet Room A\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/study-rooms/update/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-rooms",
+                "update",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 study-rooms - delete (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", function () { pm.response.to.have.status(404); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"The study room with that id does not exist\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/study-rooms/delete/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-rooms",
+                "delete",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 mentors - get all",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/mentors/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "mentors",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 mentors - get by id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/mentors/{{mentAlice}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "mentors",
+                "{{mentAlice}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 mentors - get by id (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", function () { pm.response.to.have.status(404); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"The mentor with that id does not exist\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/mentors/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "mentors",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 mentors - update",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Mentor updated successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Uwase\",\n  \"email\": \"alice.uwase@auca.ac.rw\",\n  \"studyRoom\": {\n    \"id\": \"{{room11}}\"\n  },\n  \"subjects\": [\n    {\n      \"id\": \"{{subjMath}}\"\n    },\n    {\n      \"id\": \"{{subjProg}}\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/mentors/update/{{mentAlice}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "mentors",
+                "update",
+                "{{mentAlice}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 mentors - update (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", function () { pm.response.to.have.status(404); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"The mentor with that id does not exist\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Uwase\",\n  \"email\": \"alice.uwase@auca.ac.rw\",\n  \"studyRoom\": {\n    \"id\": \"{{room11}}\"\n  },\n  \"subjects\": [\n    {\n      \"id\": \"{{subjMath}}\"\n    },\n    {\n      \"id\": \"{{subjProg}}\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/mentors/update/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "mentors",
+                "update",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 mentors - delete (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", function () { pm.response.to.have.status(404); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"The mentor with that id does not exist\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/mentors/delete/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "mentors",
+                "delete",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 students - get all",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/students/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "students",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 students - get by id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/students/{{stuEric}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "students",
+                "{{stuEric}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 students - get by id (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", function () { pm.response.to.have.status(404); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"The student with that id does not exist\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/students/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "students",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 students - update",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Student updated successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Eric\",\n  \"lastName\": \"Gasana\",\n  \"studentNumber\": \"27413\",\n  \"programme\": \"Software Engineering\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/students/update/{{stuEric}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "students",
+                "update",
+                "{{stuEric}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 students - update (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", function () { pm.response.to.have.status(404); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"The student with that id does not exist\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Eric\",\n  \"lastName\": \"Gasana\",\n  \"studentNumber\": \"27413\",\n  \"programme\": \"Software Engineering\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/students/update/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "students",
+                "update",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 students - delete (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", function () { pm.response.to.have.status(404); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"The student with that id does not exist\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/students/delete/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "students",
+                "delete",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 study-sessions - get all",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/study-sessions/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-sessions",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 study-sessions - get by id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/study-sessions/{{sess1}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-sessions",
+                "{{sess1}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 study-sessions - get by id (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", function () { pm.response.to.have.status(404); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"The study session with that id does not exist\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/study-sessions/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-sessions",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 study-sessions - update",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Study session updated successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sessionDate\": \"2026-10-05\",\n  \"status\": \"FINISHED\",\n  \"goal\": \"Finish calculus chapter 3\",\n  \"plannedMinutes\": 90,\n  \"student\": {\n    \"id\": \"{{stuEric}}\"\n  },\n  \"mentor\": {\n    \"id\": \"{{mentAlice}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/study-sessions/update/{{sess1}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-sessions",
+                "update",
+                "{{sess1}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 study-sessions - update (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", function () { pm.response.to.have.status(404); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"The study session with that id does not exist\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sessionDate\": \"2026-10-05\",\n  \"status\": \"FINISHED\",\n  \"goal\": \"Finish calculus chapter 3\",\n  \"plannedMinutes\": 90,\n  \"student\": {\n    \"id\": \"{{stuEric}}\"\n  },\n  \"mentor\": {\n    \"id\": \"{{mentAlice}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/study-sessions/update/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-sessions",
+                "update",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 study-sessions - delete (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", function () { pm.response.to.have.status(404); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"The study session with that id does not exist\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/study-sessions/delete/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-sessions",
+                "delete",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 temp subject - save",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Subject saved successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Temp Subject\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/subjects/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "subjects",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 temp subject - capture id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "var data = pm.response.json();",
+                  "function pick(f, v) { var x = data.find(function (o) { return o[f] === v; }); return x ? x.id : ''; }",
+                  "pm.collectionVariables.set(\"tempSubj\", pick(\"name\", \"Temp Subject\"));",
+                  "pm.test(\"Captured tempSubj\", function () { pm.expect(pm.collectionVariables.get(\"tempSubj\")).to.not.eql(\"\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/subjects/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "subjects",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 temp subject - delete",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"Subject deleted successfully\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/subjects/delete/{{tempSubj}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "subjects",
+                "delete",
+                "{{tempSubj}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2 temp subject - get after delete (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", function () { pm.response.to.have.status(404); });",
+                  "pm.test(\"Message is correct\", function () { pm.expect(pm.response.text()).to.include(\"The subject with that id does not exist\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/subjects/{{tempSubj}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "subjects",
+                "{{tempSubj}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Part B",
+      "item": [
+        {
+          "name": "B1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/students/by-last-name?lastName=gasana",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "students",
+                "by-last-name"
+              ],
+              "query": [
+                {
+                  "key": "lastName",
+                  "value": "gasana"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "B1 Empty",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/students/by-last-name?lastName=nobody",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "students",
+                "by-last-name"
+              ],
+              "query": [
+                {
+                  "key": "lastName",
+                  "value": "nobody"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "B2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/study-sessions/by-status?status=PLANNED",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-sessions",
+                "by-status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "PLANNED"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "B2 Invalid(400)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/study-sessions/by-status?status=WRONG",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-sessions",
+                "by-status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "WRONG"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "B3",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/study-sessions/between?start=2026-10-01&end=2026-10-31",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-sessions",
+                "between"
+              ],
+              "query": [
+                {
+                  "key": "start",
+                  "value": "2026-10-01"
+                },
+                {
+                  "key": "end",
+                  "value": "2026-10-31"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "B3 Inclusive",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/study-sessions/between?start=2026-10-05&end=2026-10-12",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-sessions",
+                "between"
+              ],
+              "query": [
+                {
+                  "key": "start",
+                  "value": "2026-10-05"
+                },
+                {
+                  "key": "end",
+                  "value": "2026-10-12"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Part C",
+      "item": [
+        {
+          "name": "C1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/mentors/by-subject?name=mathematics",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "mentors",
+                "by-subject"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "mathematics"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "C1 Programming",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/mentors/by-subject?name=PROGRAMMING",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "mentors",
+                "by-subject"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "PROGRAMMING"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "C1 Empty",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/mentors/by-subject?name=history",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "mentors",
+                "by-subject"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "history"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "C2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/study-rooms/free",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-rooms",
+                "free"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "C3",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/subjects/unused",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "subjects",
+                "unused"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "C4",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/students/of-mentor/{{mentAlice}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "students",
+                "of-mentor",
+                "{{mentAlice}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "C4 404",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/students/of-mentor/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "students",
+                "of-mentor",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Part D",
+      "item": [
+        {
+          "name": "D1",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "   {\"sessionDate\":\"2026-12-30\",\"status\":\"FINISHED\",\"goal\":\"D1 test\",\"plannedMinutes\":60,\"student\":{\"id\":\"{{stuEric}}\"},\"mentor\":{\"id\":\"{{mentAlice}}\"}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/study-sessions/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-sessions",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D2",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/study-sessions/e20e6390-6bf7-47ed-b6d9-56819311ebb5/status?status=IN_PROGRESS",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-sessions",
+                "e20e6390-6bf7-47ed-b6d9-56819311ebb5",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "IN_PROGRESS"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D2 back",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/study-sessions/e20e6390-6bf7-47ed-b6d9-56819311ebb5/status?status=PLANNED",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-sessions",
+                "e20e6390-6bf7-47ed-b6d9-56819311ebb5",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "PLANNED"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D2 finish",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/study-sessions/e20e6390-6bf7-47ed-b6d9-56819311ebb5/status?status=FINISHED",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-sessions",
+                "e20e6390-6bf7-47ed-b6d9-56819311ebb5",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "FINISHED"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D2 final",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/study-sessions/e20e6390-6bf7-47ed-b6d9-56819311ebb5/status?status=SKIPPED",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-sessions",
+                "e20e6390-6bf7-47ed-b6d9-56819311ebb5",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "SKIPPED"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D2 404",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/study-sessions/00000000-0000-0000-0000-000000000000/status?status=SKIPPED",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-sessions",
+                "00000000-0000-0000-0000-000000000000",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "SKIPPED"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D3",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mentors/0f65688a-4513-4647-9640-625bf40f9f87/subjects/f87f5a69-b634-4a71-b63c-9b5f3d50004c",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mentors",
+                "0f65688a-4513-4647-9640-625bf40f9f87",
+                "subjects",
+                "f87f5a69-b634-4a71-b63c-9b5f3d50004c"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D3 again",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mentors/0f65688a-4513-4647-9640-625bf40f9f87/subjects/f87f5a69-b634-4a71-b63c-9b5f3d50004c",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mentors",
+                "0f65688a-4513-4647-9640-625bf40f9f87",
+                "subjects",
+                "f87f5a69-b634-4a71-b63c-9b5f3d50004c"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D3 no subject",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mentors/0f65688a-4513-4647-9640-625bf40f9f87/subjects/00000000-0000-0000-0000-000000000000",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mentors",
+                "0f65688a-4513-4647-9640-625bf40f9f87",
+                "subjects",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D3 no mentor",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mentors/00000000-0000-0000-0000-000000000000/subjects/f87f5a69-b634-4a71-b63c-9b5f3d50004c",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mentors",
+                "00000000-0000-0000-0000-000000000000",
+                "subjects",
+                "f87f5a69-b634-4a71-b63c-9b5f3d50004c"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D4",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mentors/930e58f2-9d63-48ca-a166-e27297a834a9/study-room?roomNumber=14",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mentors",
+                "930e58f2-9d63-48ca-a166-e27297a834a9",
+                "study-room"
+              ],
+              "query": [
+                {
+                  "key": "roomNumber",
+                  "value": "14"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D4 taken",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mentors/930e58f2-9d63-48ca-a166-e27297a834a9/study-room?roomNumber=11",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mentors",
+                "930e58f2-9d63-48ca-a166-e27297a834a9",
+                "study-room"
+              ],
+              "query": [
+                {
+                  "key": "roomNumber",
+                  "value": "11"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D4 no room",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mentors/930e58f2-9d63-48ca-a166-e27297a834a9/study-room?roomNumber=99",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mentors",
+                "930e58f2-9d63-48ca-a166-e27297a834a9",
+                "study-room"
+              ],
+              "query": [
+                {
+                  "key": "roomNumber",
+                  "value": "99"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D4 no mentor",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mentors/00000000-0000-0000-0000-000000000000/study-room?roomNumber=14",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mentors",
+                "00000000-0000-0000-0000-000000000000",
+                "study-room"
+              ],
+              "query": [
+                {
+                  "key": "roomNumber",
+                  "value": "14"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Part E",
+      "item": [
+        {
+          "name": "E1",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"topic\": \"Integration by parts\", \"reflection\": \"Understood the method but need more practice\", \"minutesStudied\": 90}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/study-logs/save?studySessionId=3f5ca6fe-5456-4fb0-a1bd-96773d4b8ab5",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-logs",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "studySessionId",
+                  "value": "3f5ca6fe-5456-4fb0-a1bd-96773d4b8ab5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E1 second log",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"topic\": \"Limits\", \"reflection\": \"Understood the method but need more practice\", \"minutesStudied\": 90}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/study-logs/save?studySessionId=3f5ca6fe-5456-4fb0-a1bd-96773d4b8ab5",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-logs",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "studySessionId",
+                  "value": "3f5ca6fe-5456-4fb0-a1bd-96773d4b8ab5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E1 on Eric’s other session",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"topic\": \"Integration by parts\", \"reflection\": \"Understood the method but need more practice\", \"minutesStudied\": 90}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/study-logs/save?studySessionId=e20e6390-6bf7-47ed-b6d9-56819311ebb5",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-logs",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "studySessionId",
+                  "value": "e20e6390-6bf7-47ed-b6d9-56819311ebb5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E1 not finished",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"topic\": \"Integration by parts\", \"reflection\": \"Understood the method but need more practice\", \"minutesStudied\": 90}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/study-logs/save?studySessionId=4105427b-70b7-4d76-94a5-dc7941adf6a1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-logs",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "studySessionId",
+                  "value": "4105427b-70b7-4d76-94a5-dc7941adf6a1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E1 404",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"topic\": \"Integration by parts\", \"reflection\": \"Understood the method but need more practice\", \"minutesStudied\": 90}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/study-logs/save?studySessionId=00000000-0000-0000-0000-000000000000",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-logs",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "studySessionId",
+                  "value": "00000000-0000-0000-0000-000000000000"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/study-logs/student/27413",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-logs",
+                "student",
+                "27413"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E2 empty",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/study-logs/student/99999",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-logs",
+                "student",
+                "99999"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E3 protect",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/study-sessions/delete/3f5ca6fe-5456-4fb0-a1bd-96773d4b8ab5",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-sessions",
+                "delete",
+                "3f5ca6fe-5456-4fb0-a1bd-96773d4b8ab5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E3 list",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/study-logs/all",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-logs",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E3",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/study-logs/delete/25e996fd-4071-478c-aa35-84ed1e47b306",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-logs",
+                "delete",
+                "25e996fd-4071-478c-aa35-84ed1e47b306"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E3 404",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/study-logs/delete/25e996fd-4071-478c-aa35-84ed1e47b306",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-logs",
+                "delete",
+                "25e996fd-4071-478c-aa35-84ed1e47b306"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Part F",
+      "item": [
+        {
+          "name": "F1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/study-sessions/stats/by-status",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-sessions",
+                "stats",
+                "by-status"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "F2",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "   {\"sessionDate\":\"2026-12-22\",\"goal\":\"F2 temp\",\"plannedMinutes\":30,\"student\":{\"id\":\"a59d73c2-3311-4bc9-b114-06c7b7c1c507\"},\"mentor\":{\"id\":\"0f65688a-4513-4647-9640-625bf40f9f87\"}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/study-sessions/cancel-day?mentorId=0f65688a-4513-4647-9640-625bf40f9f87&date=2026-12-22",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-sessions",
+                "cancel-day"
+              ],
+              "query": [
+                {
+                  "key": "mentorId",
+                  "value": "0f65688a-4513-4647-9640-625bf40f9f87"
+                },
+                {
+                  "key": "date",
+                  "value": "2026-12-22"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "F2 check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/study-sessions/all",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-sessions",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "F2 none",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/study-sessions/cancel-day?mentorId=0f65688a-4513-4647-9640-625bf40f9f87&date=2026-12-23",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-sessions",
+                "cancel-day"
+              ],
+              "query": [
+                {
+                  "key": "mentorId",
+                  "value": "0f65688a-4513-4647-9640-625bf40f9f87"
+                },
+                {
+                  "key": "date",
+                  "value": "2026-12-23"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Bonus",
+      "item": [
+        {
+          "name": "Bonus dashboard",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/dashboard/summary",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "dashboard",
+                "summary"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Bonus page",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/study-sessions/page?page=0&size=5&sort=sessionDate,desc",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-sessions",
+                "page"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sort",
+                  "value": "sessionDate,desc"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Bonus page 2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/study-sessions/page?page=1&size=5&sort=sessionDate,desc",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "study-sessions",
+                "page"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sort",
+                  "value": "sessionDate,desc"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "subjMath",
+      "value": ""
+    },
+    {
+      "key": "subjProg",
+      "value": ""
+    },
+    {
+      "key": "subjPhys",
+      "value": ""
+    },
+    {
+      "key": "subjHist",
+      "value": ""
+    },
+    {
+      "key": "room11",
+      "value": ""
+    },
+    {
+      "key": "room12",
+      "value": ""
+    },
+    {
+      "key": "room13",
+      "value": ""
+    },
+    {
+      "key": "room14",
+      "value": ""
+    },
+    {
+      "key": "mentAlice",
+      "value": ""
+    },
+    {
+      "key": "mentBrian",
+      "value": ""
+    },
+    {
+      "key": "mentChantal",
+      "value": ""
+    },
+    {
+      "key": "stuEric",
+      "value": ""
+    },
+    {
+      "key": "stuDiane",
+      "value": ""
+    },
+    {
+      "key": "stuPatrick",
+      "value": ""
+    },
+    {
+      "key": "stuGrace",
+      "value": ""
+    },
+    {
+      "key": "stuSamuel",
+      "value": ""
+    },
+    {
+      "key": "sess1",
+      "value": ""
+    },
+    {
+      "key": "tempSubj",
+      "value": ""
+    }
+  ]
+}
